@@ -20,6 +20,8 @@ public class Boletim {
 	
 	private String turno;
 	
+	private String curso;
+	
 	private int ano;
 	
 	private int avaliacao;
@@ -29,7 +31,7 @@ public class Boletim {
 	}
 
 	public Boletim(Aluno aluno, List<Materia> materias, String unidadeEscolar, String municipio, int etapa,
-			int turma, String turno, int ano, int avaliacao) {
+			int turma, String turno, String curso, int ano, int avaliacao) {
 		super();
 		this.aluno = aluno;
 		this.materias = materias;
@@ -38,6 +40,7 @@ public class Boletim {
 		this.etapa = etapa;
 		this.turma = turma;
 		this.turno = turno;
+		this.curso = curso;
 		this.ano = ano;
 		this.avaliacao = avaliacao;
 	}
@@ -120,6 +123,14 @@ public class Boletim {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCurso() {
+		return curso;
+	}
+
+	public void setCurso(String curso) {
+		this.curso = curso;
 	}
 	
 	

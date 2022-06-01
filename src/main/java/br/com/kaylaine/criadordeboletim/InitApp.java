@@ -23,31 +23,31 @@ public class InitApp {
 
 	public static void main(String[] args) {
 
-//		Aluno novoAluno = new Aluno(45454545, "Kaylaine");
-//		
-//		List<Materia> materias = new ArrayList<Materia>();
-//		
-//		Materia m1 = new Materia("Bio", 9.5, 1);
-//		Materia m2 = new Materia("Geo", 4, 2);
-//		Materia m3 = new Materia("Mat", 7, 5);
-//		
-//		materias.add(m1);
-//		materias.add(m2);
-//		materias.add(m3);
-//
-//		Boletim boletim = new Boletim(novoAluno,materias, "unidadeEscolar", "municipio", 1,
-//				8, "NOTURNO", 2020, 1);
-//		
-//		System.out.println(gerarBoletimEscrito(boletim));
-		
-		Aluno novoAluno = new Aluno();
-		novoAluno = perguntarInformaçõesAluno();
+		Aluno novoAluno = new Aluno(45454545, "Kaylaine");
 		
 		List<Materia> materias = new ArrayList<Materia>();
-		materias = cadastrarMaterias(novoAluno);
 		
-		Boletim boletim = new Boletim();
-		boletim = criarBoletim(novoAluno, materias);
+		Materia m1 = new Materia("Bio", 9.5, 1);
+		Materia m2 = new Materia("Geo", 4, 2);
+		Materia m3 = new Materia("Mat", 7, 5);
+		
+		materias.add(m1);
+		materias.add(m2);
+		materias.add(m3);
+
+		Boletim boletim = new Boletim(novoAluno,materias, "unidadeEscolar", "municipio", 1,
+				8, "NOTURNO", "curso", 2020, 1);
+		
+		System.out.println(gerarBoletimEscrito(boletim));
+		
+//		Aluno novoAluno = new Aluno();
+//		novoAluno = perguntarInformaçõesAluno();
+//		
+//		List<Materia> materias = new ArrayList<Materia>();
+//		materias = cadastrarMaterias(novoAluno);
+//		
+//		Boletim boletim = new Boletim();
+//		boletim = criarBoletim(novoAluno, materias);
 		
 		//do {
 			//mostrarMenu();
@@ -55,9 +55,6 @@ public class InitApp {
 			//int opcaoDeMenu 
 			
 		//} while (condition);
-		
-		
-		System.out.println(boletim);
 		
 		sc.close();
 	}
@@ -101,7 +98,7 @@ public class InitApp {
 					novoAluno.setMatricula(matriculaInformada);
 					
 					isContinuar = true;
-					AlunoRepository.salvarAluno(novoAluno);
+					AlunoRepository.salvar(novoAluno);
 					
 					return novoAluno;
 				} catch (VerificarLiteralException e) {
@@ -161,7 +158,7 @@ public class InitApp {
 					novaMateria.setNota(notaInformada);
 					novaMateria.setQtdeDeFalta(qtdeFaltaInformada);
 					materias.add(novaMateria);
-					MateriaRepository.salvarMateria(novaMateria);
+					MateriaRepository.salvar(novaMateria);
 				}
 				
 				isContinuar = true;
@@ -203,6 +200,14 @@ public class InitApp {
 							"Erro! O municipio deve ter entre 2 e 60 caracteres literais.");
 				}
 
+				System.out.println("Informe o curso:");
+				String cursoInformado = sc.next();
+
+				if (!cursoInformado.matches("[A-Za-zÀ-ú]{2,60}")) {
+					throw new VerificarLiteralException(
+							"Erro! O curso deve ter entre 2 e 60 caracteres literais.");
+				}
+				
 				System.out.println("Informe a etapa:");
 	            String etapaInformadaEscrita = sc.next();
 				
@@ -223,6 +228,8 @@ public class InitApp {
 				
 				int turmaInformada = Integer.valueOf(turmaInformadaEscrita);
 
+				
+				
 				System.out.println("Informe o turno:");
 	            String turnoInformado = sc.next();
 				
@@ -245,12 +252,13 @@ public class InitApp {
 				novoBoletim.setMunicipio(municipioInformado);
 				novoBoletim.setEtapa(etapaInformada);
 				novoBoletim.setTurma(turmaInformada);
+				novoBoletim.setCurso(cursoInformado);
 				novoBoletim.setTurno(turnoInformado);
 				novoBoletim.setAvaliacao(avaliacaoInformada);
 				novoBoletim.setAno(LocalDate.now().getYear());
 
 				isContinuar = true;
-				BoletimRepository.salvarBoletim(novoBoletim);
+				BoletimRepository.salvar(novoBoletim);
 				return novoBoletim;
 			} catch (VerificarLiteralException e) {
 				System.out.println(e.getMessage());
@@ -263,19 +271,27 @@ public class InitApp {
 		return null;
 	}
 
-//	private static String gerarBoletimEscrito(Boletim boletim) {
-//		int qtdeCaracter = 0;
-//		String boletimEscrito = """
-//				UNIDADE ESCOLAR: %s
-//				MUNICÍPIO: %s
-//				CURSO: %s
-//				TURNO: %s
-//				ETAPA: %d
-//				TURMA: %d
-//				ALUNO: %d - %s
-//				""";
-//				;
-//		
-//		return boletimEscrito;
-//	}
+	private static String gerarBoletimEscrito(Boletim boletim) {
+		String boletimEscrito = String.format(
+				"""
+				UNIDADE ESCOLAR: %s
+				MUNICÍPIO: %s
+				CURSO: %s
+				TURNO: %s
+				ETAPA: %d
+				TURMA: %d
+				ALUNO: %d - %s
+				""",
+				boletim.getUnidadeEscolar(),
+				boletim.getMunicipio(),
+				boletim.getCurso(),
+				boletim.getTurno(),
+				boletim.getEtapa(),
+				boletim.getTurma(),
+				boletim.getAluno().getMatricula(),
+				boletim.getAluno().getNomeCompleto());
+				
+		
+		return boletimEscrito;
+	}
 }

@@ -11,7 +11,7 @@ private static final List<Boletim> boletins = new ArrayList<>();
 	
 	private static int id = 0;
 	
-	public static Boletim salvarBoletim(Boletim boletim) {
+	public static Boletim salvar(Boletim boletim) {
 		boletim.setId(id);
 		BoletimRepository.boletins.add(boletim);
 		id++;

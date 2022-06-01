@@ -11,10 +11,12 @@ public class AlunoRepository {
 	
 	private static int id = 0;
 	
-	public static Aluno salvarAluno(Aluno aluno) {
+	public static Aluno salvar(Aluno aluno) {
 		aluno.setId(id);
 		AlunoRepository.alunos.add(aluno);
 		id++;
 		return aluno;
 	}
+	
+	
 }

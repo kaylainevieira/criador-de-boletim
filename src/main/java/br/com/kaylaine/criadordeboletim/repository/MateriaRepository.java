@@ -11,7 +11,7 @@ private static final List<Materia> materias = new ArrayList<>();
 
 	private static int id = 0;
 	
-	public static Materia salvarMateria(Materia materia) {
+	public static Materia salvar(Materia materia) {
 		materia.setId(id);
 		MateriaRepository.materias.add(materia);
 		id++;
