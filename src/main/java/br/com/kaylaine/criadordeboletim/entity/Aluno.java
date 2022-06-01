@@ -2,7 +2,6 @@ package br.com.kaylaine.criadordeboletim.entity;
 
 public class Aluno {
 	
-	private int id;
 
 	private int matricula;
 	
@@ -34,12 +33,4 @@ public class Aluno {
 		this.nomeCompleto = nomeCompleto;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-		
 }

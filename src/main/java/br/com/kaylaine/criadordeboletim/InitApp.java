@@ -23,22 +23,24 @@ public class InitApp {
 
 	public static void main(String[] args) {
 
-		Aluno novoAluno = new Aluno(45454545, "Kaylaine");
+//		Aluno novoAluno = new Aluno(45454545, "Kaylaine");
+//		
+//		List<Materia> materias = new ArrayList<Materia>();
+//		
+//		Materia m1 = new Materia("Bio", 9.5, 1);
+//		Materia m2 = new Materia("Geo", 4, 2);
+//		Materia m3 = new Materia("Mat", 7, 5);
+//		
+//		materias.add(m1);
+//		materias.add(m2);
+//		materias.add(m3);
+//
+//		Boletim boletim = new Boletim(novoAluno,materias, "unidadeEscolar", "municipio", 1,
+//				8, "NOTURNO", "curso", 2020, 1);
+//		
+//		BoletimRepository.salvar(boletim);
 		
-		List<Materia> materias = new ArrayList<Materia>();
-		
-		Materia m1 = new Materia("Bio", 9.5, 1);
-		Materia m2 = new Materia("Geo", 4, 2);
-		Materia m3 = new Materia("Mat", 7, 5);
-		
-		materias.add(m1);
-		materias.add(m2);
-		materias.add(m3);
-
-		Boletim boletim = new Boletim(novoAluno,materias, "unidadeEscolar", "municipio", 1,
-				8, "NOTURNO", "curso", 2020, 1);
-		
-		System.out.println(gerarBoletimEscrito(boletim));
+//		System.out.println(gerarBoletimEscrito(boletim));
 		
 //		Aluno novoAluno = new Aluno();
 //		novoAluno = perguntarInformaçõesAluno();
@@ -49,23 +51,47 @@ public class InitApp {
 //		Boletim boletim = new Boletim();
 //		boletim = criarBoletim(novoAluno, materias);
 		
-		//do {
-			//mostrarMenu();
+		int opcaoDeMenu = 0;
+		do {
+			gerarTextoDeMenu();
 			
-			//int opcaoDeMenu 
+			opcaoDeMenu = sc.nextInt();
 			
-		//} while (condition);
+			if (opcaoDeMenu == 1) {
+				Aluno novoAluno = new Aluno();
+				novoAluno = perguntarInformaçõesAluno();
+				
+				List<Materia> materias = new ArrayList<Materia>();
+				materias = cadastrarMaterias(novoAluno);
+				
+				Boletim boletim = new Boletim();
+				boletim = criarBoletim(novoAluno, materias);
+				
+				BoletimRepository.salvar(boletim);
+			
+			}else if (opcaoDeMenu == 2) {
+				System.out.println("Informe a matricula do aluno que deseja mostrar:");
+				int matriculaParaMostrar = sc.nextInt();
+				AlunoRepository.mostrarPor(matriculaParaMostrar);
+				
+			}else if (opcaoDeMenu == 3) {
+				System.out.println("Informe a matricula do aluno que deseja remover:");
+				int matriculaParaExcluir = sc.nextInt();
+				AlunoRepository.removerPor(matriculaParaExcluir);
+			}
+			
+		} while (opcaoDeMenu != 4);
 		
 		sc.close();
 	}
 
-	private static void mostrarMenu() {
+	private static void gerarTextoDeMenu() {
 		System.out.println(
 				"""
 				Informe:
 				1 - Cadastrar boletim.
-				2 - Listar boletins.
-				3 - Excluir boletins.
+				2 - Mostrar boletim.
+				3 - Excluir boletim.
 				4 - Sair.
 				""");
 	}
