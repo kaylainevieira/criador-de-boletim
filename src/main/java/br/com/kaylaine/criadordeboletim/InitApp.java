@@ -11,83 +11,107 @@ import br.com.kaylaine.criadordeboletim.entity.Materia;
 import br.com.kaylaine.criadordeboletim.exceptions.VerificarDecimalNotaException;
 import br.com.kaylaine.criadordeboletim.exceptions.VerificarInteiroException;
 import br.com.kaylaine.criadordeboletim.exceptions.VerificarLiteralException;
-import br.com.kaylaine.criadordeboletim.repository.AlunoRepository;
 import br.com.kaylaine.criadordeboletim.repository.BoletimRepository;
-import br.com.kaylaine.criadordeboletim.repository.MateriaRepository;
 
 public class InitApp {
 
-	public static Scanner sc = new Scanner(System.in);
-	
 	public static final int QTDE_TOTAL_CARACTERES = 80;
+
+	public static final int QTDE_METADE_CARACTERES = 36;
+
+	public static final int QTDE_ESPACOS_LINHA1 = 20;
+
+	public static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
 
-//		Aluno novoAluno = new Aluno(45454545, "Kaylaine");
-//		
-//		List<Materia> materias = new ArrayList<Materia>();
-//		
-//		Materia m1 = new Materia("Bio", 9.5, 1);
-//		Materia m2 = new Materia("Geo", 4, 2);
-//		Materia m3 = new Materia("Mat", 7, 5);
-//		
-//		materias.add(m1);
-//		materias.add(m2);
-//		materias.add(m3);
-//
-//		Boletim boletim = new Boletim(novoAluno,materias, "unidadeEscolar", "municipio", 1,
-//				8, "NOTURNO", "curso", 2020, 1);
-//		
-//		BoletimRepository.salvar(boletim);
-		
-//		System.out.println(gerarBoletimEscrito(boletim));
-		
-//		Aluno novoAluno = new Aluno();
-//		novoAluno = perguntarInformaçõesAluno();
-//		
-//		List<Materia> materias = new ArrayList<Materia>();
-//		materias = cadastrarMaterias(novoAluno);
-//		
-//		Boletim boletim = new Boletim();
-//		boletim = criarBoletim(novoAluno, materias);
-		
-		int opcaoDeMenu = 0;
+		String opcaoDeMenu = "";
 		do {
-			gerarTextoDeMenu();
-			
-			opcaoDeMenu = sc.nextInt();
-			
-			if (opcaoDeMenu == 1) {
+			try {
+				gerarTextoDeMenu();
+				opcaoDeMenu = "4";
+				opcaoDeMenu = sc.next();
+
+				if (!opcaoDeMenu.matches("[0-9]{1}")) {
+					throw new VerificarInteiroException("Opção inválida. Digite um número de 1 à 4.");
+				}
+
+				int opcaoDeMenuInformada = Integer.valueOf(opcaoDeMenu);
+
 				Aluno novoAluno = new Aluno();
-				novoAluno = perguntarInformaçõesAluno();
-				
 				List<Materia> materias = new ArrayList<Materia>();
-				materias = cadastrarMaterias(novoAluno);
-				
 				Boletim boletim = new Boletim();
-				boletim = criarBoletim(novoAluno, materias);
-				
-				BoletimRepository.salvar(boletim);
-			
-			}else if (opcaoDeMenu == 2) {
-				System.out.println("Informe a matricula do aluno que deseja mostrar:");
-				int matriculaParaMostrar = sc.nextInt();
-				AlunoRepository.mostrarPor(matriculaParaMostrar);
-				
-			}else if (opcaoDeMenu == 3) {
-				System.out.println("Informe a matricula do aluno que deseja remover:");
-				int matriculaParaExcluir = sc.nextInt();
-				AlunoRepository.removerPor(matriculaParaExcluir);
+
+				if (opcaoDeMenuInformada == 1) {
+
+//					novoAluno = perguntarInformaçõesAluno();
+//					materias = cadastrarMaterias(novoAluno);
+//					boletim = criarBoletim(novoAluno, materias);
+//					
+//					BoletimRepository.salvar(boletim);
+					boletim = criarBoletimExemplo();
+					BoletimRepository.salvar(boletim);
+
+				} else if (opcaoDeMenuInformada == 2) {
+					System.out.println("Informe a matricula do aluno que deseja mostrar:");
+					int matriculaParaMostrar = sc.nextInt();
+
+					Boletim boletimParaMostrar = new Boletim();
+					boletimParaMostrar = BoletimRepository.mostrarPor(matriculaParaMostrar);
+					System.out.println(gerarBoletimEscrito(boletimParaMostrar));
+
+				} else if (opcaoDeMenuInformada == 3) {
+					System.out.println("Informe a matricula do aluno que deseja remover:");
+					int matriculaParaExcluir = sc.nextInt();
+					
+					if (BoletimRepository.removerPor(matriculaParaExcluir)) {
+						System.out.println("Boletim removido com sucesso.");
+					} else {
+						System.out.println("Boletim não encontrado.");
+					}
+
+				} else if (opcaoDeMenuInformada == 4) {
+					System.out.println("Aplicação encerrada.");
+
+				} else {
+					System.out.println("Opção inválida.");
+				}
+
+			} catch (VerificarInteiroException e) {
+				System.out.println("Opção inválida.");
+			} catch (NullPointerException e) {
+				System.out.println("Boletim não encontrado.");
 			}
-			
-		} while (opcaoDeMenu != 4);
-		
+
+		} while (!opcaoDeMenu.equalsIgnoreCase("4"));
+
 		sc.close();
 	}
 
+	private static Boletim criarBoletimExemplo() {
+		Aluno aluno1 = new Aluno(55, "Maria dos Santos");
+
+		List<Materia> materias = new ArrayList<Materia>();
+
+		String[] materiasEscritas = new String[] { "Biologia", "Matemática", "Geografia", "História", "Educação Física",
+				"Língua Estrangeira - Inglês", "Língua Portuguesa", "Sociologia", "Física", "Química", "Filosofia",
+				"Arte" };
+
+		for (String materia : materiasEscritas) {
+
+			Materia novaMateria = new Materia(10, 4);
+			novaMateria.setNome(materia);
+			materias.add(novaMateria);
+		}
+
+		Boletim boletim = new Boletim(aluno1, materias, "Henrique Fontes", "Tubarão", 1, 8, "NOTURNO", "Ensino Médio",
+				2020, 1);
+		return boletim;
+	}
+
 	private static void gerarTextoDeMenu() {
-		System.out.println(
-				"""
+		System.out.println("""
+
 				Informe:
 				1 - Cadastrar boletim.
 				2 - Mostrar boletim.
@@ -95,45 +119,43 @@ public class InitApp {
 				4 - Sair.
 				""");
 	}
-	
+
 	private static Aluno perguntarInformaçõesAluno() {
 		boolean isContinuar = false;
-			do {
-				try {
-					Aluno novoAluno = new Aluno();
+		do {
+			try {
+				Aluno novoAluno = new Aluno();
 
-					System.out.println("Informe a nome do aluno(a):");
-					String nomeCompletoInformado = sc.next();
+				System.out.println("Informe a nome do aluno(a):");
+				String nomeCompletoInformado = sc.next();
 
-					if (!nomeCompletoInformado.matches("[A-Za-zÀ-ú]{2,60}")) {
-						throw new VerificarLiteralException(
-								"Erro! O nome completo deve ter entre 2 e 60 caracteres literais.");
-					}
-
-					System.out.println("Informe a matrícula do aluno(a):");
-					String matriculaInformadaEscrita = sc.next();
-					
-					if (!matriculaInformadaEscrita.matches("[0-9]{10}")) {
-						throw new VerificarInteiroException(
-								"Erro! A matricula deve ter 10 caracteres inteiros positivo.");
-					}
-					
-					int matriculaInformada = Integer.valueOf(matriculaInformadaEscrita);
-					
-					novoAluno.setNomeCompleto(nomeCompletoInformado);
-					novoAluno.setMatricula(matriculaInformada);
-					
-					isContinuar = true;
-					AlunoRepository.salvar(novoAluno);
-					
-					return novoAluno;
-				} catch (VerificarLiteralException e) {
-					System.out.println(e.getMessage());
-				} catch (VerificarInteiroException e) {
-					System.out.println(e.getMessage());	
+				if (!nomeCompletoInformado.matches("[A-Za-zÀ-ú]{2,60}")) {
+					throw new VerificarLiteralException(
+							"Erro! O nome completo deve ter entre 2 e 60 caracteres literais.");
 				}
-			} while (!isContinuar);
-		
+
+				System.out.println("Informe a matrícula do aluno(a):");
+				String matriculaInformadaEscrita = sc.next();
+
+				if (!matriculaInformadaEscrita.matches("[0-9]{6}")) {
+					throw new VerificarInteiroException("Erro! A matricula deve ter 10 caracteres inteiros positivo.");
+				}
+
+				int matriculaInformada = Integer.valueOf(matriculaInformadaEscrita);
+
+				novoAluno.setNomeCompleto(nomeCompletoInformado);
+				novoAluno.setMatricula(matriculaInformada);
+
+				isContinuar = true;
+
+				return novoAluno;
+			} catch (VerificarLiteralException e) {
+				System.out.println(e.getMessage());
+			} catch (VerificarInteiroException e) {
+				System.out.println(e.getMessage());
+			}
+		} while (!isContinuar);
+
 		return null;
 	}
 
@@ -145,10 +167,9 @@ public class InitApp {
 
 				System.out.println("Informe a nota e a quantidade de falta em cada matéria:");
 
-				String[] materiasEscritas = new String[] {
-						"Biologia", "Matemática", "Geografia", "História", "Educação Física",
-						"Língua Estrangeira - Inglês", "Língua Portuguesa", "Sociologia", 
-						"Física", "Química", "Filosofia", "Arte" };
+				String[] materiasEscritas = new String[] { "Biologia", "Matemática", "Geografia", "História",
+						"Educação Física", "Língua Estrangeira - Inglês", "Língua Portuguesa", "Sociologia", "Física",
+						"Química", "Filosofia", "Arte" };
 
 				for (String materia : materiasEscritas) {
 
@@ -157,43 +178,42 @@ public class InitApp {
 					novaMateria.setNome(materia);
 
 					System.out.println("Nota de " + materia + ":");
-	                String notaInformadaEscrita = sc.next();
-					
-					if (!(notaInformadaEscrita.matches("[0-9]{1,2}") || notaInformadaEscrita.matches("^[0-9]{1,2}.[0-9]{1}")) ) {
+					String notaInformadaEscrita = sc.next();
+
+					if (!(notaInformadaEscrita.matches("[0-9]{1,2}")
+							|| notaInformadaEscrita.matches("^[0-9]{1,2}.[0-9]{1}"))) {
 						throw new VerificarDecimalNotaException(
 								"Erro! A nota deve ser um número inteiro positivo ou um decimal com um número após a virgula.");
 					}
-					
+
 					double notaInformada = Double.valueOf(notaInformadaEscrita);
-					
-				    if (notaInformada > 10) {
-						throw new VerificarDecimalNotaException(
-								"Erro! A nota não pode ser maior que 10.");
+
+					if (notaInformada > 10) {
+						throw new VerificarDecimalNotaException("Erro! A nota não pode ser maior que 10.");
 					}
-					
+
 					System.out.println("Quantidade de faltas de " + materia + ":");
 					String qtdeFaltasInformadaEscrita = sc.next();
-					
+
 					if (!qtdeFaltasInformadaEscrita.matches("[0-9]{1,2}")) {
 						throw new VerificarInteiroException(
 								"Erro! A quantidade de faltas deve ser um inteiro positivo.");
 					}
-					
+
 					int qtdeFaltaInformada = Integer.valueOf(qtdeFaltasInformadaEscrita);
-					
+
 					novaMateria.setNota(notaInformada);
 					novaMateria.setQtdeDeFalta(qtdeFaltaInformada);
 					materias.add(novaMateria);
-					MateriaRepository.salvar(novaMateria);
 				}
-				
+
 				isContinuar = true;
-				
+
 				return materias;
 			} catch (VerificarDecimalNotaException e) {
 				System.out.println(e.getMessage());
 			} catch (VerificarInteiroException e) {
-				System.out.println(e.getMessage());	
+				System.out.println(e.getMessage());
 			} catch (NullPointerException e) {
 				System.out.println("Campo obrigatório.");
 			}
@@ -222,56 +242,48 @@ public class InitApp {
 				String municipioInformado = sc.next();
 
 				if (!municipioInformado.matches("[A-Za-zÀ-ú]{2,60}")) {
-					throw new VerificarLiteralException(
-							"Erro! O municipio deve ter entre 2 e 60 caracteres literais.");
+					throw new VerificarLiteralException("Erro! O municipio deve ter entre 2 e 60 caracteres literais.");
 				}
 
 				System.out.println("Informe o curso:");
 				String cursoInformado = sc.next();
 
 				if (!cursoInformado.matches("[A-Za-zÀ-ú]{2,60}")) {
-					throw new VerificarLiteralException(
-							"Erro! O curso deve ter entre 2 e 60 caracteres literais.");
+					throw new VerificarLiteralException("Erro! O curso deve ter entre 2 e 60 caracteres literais.");
 				}
-				
+
 				System.out.println("Informe a etapa:");
-	            String etapaInformadaEscrita = sc.next();
-				
+				String etapaInformadaEscrita = sc.next();
+
 				if (!etapaInformadaEscrita.matches("[0-9]{1}")) {
-					throw new VerificarInteiroException(
-							"Erro! A etapa deve ser um inteiro positivo.");
+					throw new VerificarInteiroException("Erro! A etapa deve ser um inteiro positivo.");
 				}
-				
+
 				int etapaInformada = Integer.valueOf(etapaInformadaEscrita);
 
 				System.out.println("Informe a turma:");
-	            String turmaInformadaEscrita = sc.next();
-				
+				String turmaInformadaEscrita = sc.next();
+
 				if (!turmaInformadaEscrita.matches("[0-9]{1}")) {
-					throw new VerificarInteiroException(
-							"Erro! A turma deve ser um inteiro positivo.");
+					throw new VerificarInteiroException("Erro! A turma deve ser um inteiro positivo.");
 				}
-				
+
 				int turmaInformada = Integer.valueOf(turmaInformadaEscrita);
 
-				
-				
 				System.out.println("Informe o turno:");
-	            String turnoInformado = sc.next();
-				
-	            if (!turnoInformado.matches("[A-Za-zÀ-ú]{2,60}")) {
-					throw new VerificarLiteralException(
-							"Erro! O turno deve ser um inteiro positivo.");
+				String turnoInformado = sc.next();
+
+				if (!turnoInformado.matches("[A-Za-zÀ-ú]{2,60}")) {
+					throw new VerificarLiteralException("Erro! O turno deve ser um inteiro positivo.");
 				}
 
 				System.out.println("Informe a avaliação:");
-	            String avaliacaoInformadaEscrita = sc.next();
-				
+				String avaliacaoInformadaEscrita = sc.next();
+
 				if (!avaliacaoInformadaEscrita.matches("[0-9]{1}")) {
-					throw new VerificarInteiroException(
-							"Erro! A avaliação deve ser um inteiro positivo.");
+					throw new VerificarInteiroException("Erro! A avaliação deve ser um inteiro positivo.");
 				}
-				
+
 				int avaliacaoInformada = Integer.valueOf(avaliacaoInformadaEscrita);
 
 				novoBoletim.setUnidadeEscolar(unidadeEscolarInformada);
@@ -289,7 +301,7 @@ public class InitApp {
 			} catch (VerificarLiteralException e) {
 				System.out.println(e.getMessage());
 			} catch (VerificarInteiroException e) {
-				System.out.println(e.getMessage());	
+				System.out.println(e.getMessage());
 			} catch (NullPointerException e) {
 				System.out.println("Campo obrigatório.");
 			}
@@ -298,26 +310,101 @@ public class InitApp {
 	}
 
 	private static String gerarBoletimEscrito(Boletim boletim) {
-		String boletimEscrito = String.format(
-				"""
-				UNIDADE ESCOLAR: %s
-				MUNICÍPIO: %s
-				CURSO: %s
-				TURNO: %s
-				ETAPA: %d
-				TURMA: %d
-				ALUNO: %d - %s
-				""",
-				boletim.getUnidadeEscolar(),
-				boletim.getMunicipio(),
-				boletim.getCurso(),
-				boletim.getTurno(),
-				boletim.getEtapa(),
-				boletim.getTurma(),
-				boletim.getAluno().getMatricula(),
-				boletim.getAluno().getNomeCompleto());
-				
-		
+		String boletimEscrito = "";
+
+		for (int i = 0; i < QTDE_TOTAL_CARACTERES; i++) {
+			boletimEscrito = boletimEscrito + "-";
+		}
+
+		boletimEscrito = boletimEscrito + "\nUnidade Escolar:";
+
+		for (int i = 0; i < QTDE_ESPACOS_LINHA1; i++) {
+			boletimEscrito = boletimEscrito + " ";
+		}
+
+		boletimEscrito = boletimEscrito + "Municipio:";
+
+		boletimEscrito = boletimEscrito + "\n" + boletim.getUnidadeEscolar();
+
+		for (int i = 0; i < (QTDE_METADE_CARACTERES - boletim.getUnidadeEscolar().length()); i++) {
+			boletimEscrito = boletimEscrito + " ";
+		}
+
+		boletimEscrito = boletimEscrito + boletim.getMunicipio();
+
+		boletimEscrito = boletimEscrito + "\n";
+		for (int i = 0; i < QTDE_TOTAL_CARACTERES; i++) {
+			boletimEscrito = boletimEscrito + "-";
+		}
+
+		boletimEscrito = boletimEscrito + "\nCurso:";
+
+		for (int i = 0; i < (QTDE_METADE_CARACTERES - "Curso:".length()); i++) {
+			boletimEscrito = boletimEscrito + " ";
+		}
+
+		boletimEscrito = boletimEscrito + "Turno:\t\tEtapa:\t\tTurma";
+
+		boletimEscrito = boletimEscrito + "\n" + "curso";
+
+		for (int i = 0; i < (QTDE_METADE_CARACTERES - "curso".length()); i++) {
+			boletimEscrito = boletimEscrito + " ";
+		}
+
+		boletimEscrito = boletimEscrito + boletim.getTurno() + "\t\t" + boletim.getEtapa() + "\t\t"
+				+ boletim.getEtapa();
+
+		boletimEscrito = boletimEscrito + "\n";
+		for (int i = 0; i < QTDE_TOTAL_CARACTERES; i++) {
+			boletimEscrito = boletimEscrito + "-";
+		}
+
+		boletimEscrito = boletimEscrito + "\nAluno:";
+
+		for (int i = 0; i < (QTDE_METADE_CARACTERES - "Aluno:".length()); i++) {
+			boletimEscrito = boletimEscrito + " ";
+		}
+
+		boletimEscrito = boletimEscrito + "\n" + boletim.getAluno().getMatricula() + " - "
+				+ boletim.getAluno().getNomeCompleto();
+
+		boletimEscrito = boletimEscrito + "\n";
+		for (int i = 0; i < QTDE_TOTAL_CARACTERES; i++) {
+			boletimEscrito = boletimEscrito + "-";
+		}
+
+		boletimEscrito = boletimEscrito + "\nDisciplina:";
+
+		for (int i = 0; i < (QTDE_METADE_CARACTERES - "Disciplina:".length()); i++) {
+			boletimEscrito = boletimEscrito + " ";
+		}
+
+		boletimEscrito = boletimEscrito + boletim.getAvaliacao() + "° Avaliação";
+
+		boletimEscrito = boletimEscrito + "\n";
+
+		for (int i = 0; i < (QTDE_METADE_CARACTERES); i++) {
+			boletimEscrito = boletimEscrito + " ";
+		}
+
+		boletimEscrito = boletimEscrito + "Nota   Falta";
+
+		for (Materia materia : boletim.getMaterias()) {
+
+			boletimEscrito = boletimEscrito + "\n" + materia.getNome();
+
+			for (int i = 0; i < (QTDE_METADE_CARACTERES - materia.getNome().length()); i++) {
+				boletimEscrito = boletimEscrito + " ";
+			}
+
+			boletimEscrito = boletimEscrito + materia.getNota() + "     " + materia.getQtdeDeFalta();
+		}
+
+		boletimEscrito = boletimEscrito + "\n";
+		for (int i = 0; i < QTDE_TOTAL_CARACTERES; i++) {
+			boletimEscrito = boletimEscrito + "-";
+		}
+
 		return boletimEscrito;
 	}
 }

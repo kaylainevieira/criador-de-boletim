@@ -14,9 +14,7 @@ public class Materia {
 		super();
 	}
 
-	public Materia(String nome, double nota, int qtdeDeFalta) {
-		super();
-		this.nome = nome;
+	public Materia(double nota, int qtdeDeFalta) {
 		this.nota = nota;
 		this.qtdeDeFalta = qtdeDeFalta;
 	}
