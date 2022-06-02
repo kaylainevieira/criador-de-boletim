@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.SplittableRandom;
 
 import br.com.kaylaine.criadordeboletim.entity.Aluno;
 import br.com.kaylaine.criadordeboletim.entity.Boletim;
@@ -89,7 +90,7 @@ public class InitApp {
 	}
 
 	private static Boletim criarBoletimExemplo() {
-		Aluno aluno1 = new Aluno(55, "Maria dos Santos");
+		Aluno aluno1 = new Aluno(555555, "Maria dos Santos");
 
 		List<Materia> materias = new ArrayList<Materia>();
 
@@ -99,7 +100,9 @@ public class InitApp {
 
 		for (String materia : materiasEscritas) {
 
-			Materia novaMateria = new Materia(10, 4);
+			SplittableRandom r = new SplittableRandom();
+			
+			Materia novaMateria = new Materia(r.nextInt(6,10), r.nextInt(0,5));
 			novaMateria.setNome(materia);
 			materias.add(novaMateria);
 		}
