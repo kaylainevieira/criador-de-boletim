@@ -45,11 +45,7 @@ public class InitApp {
 
 				if (opcaoDeMenuInformada == 1) {
 
-//					novoAluno = perguntarInformaçõesAluno();
-//					materias = cadastrarMaterias(novoAluno);
-//					boletim = criarBoletim(novoAluno, materias);
-//					
-//					BoletimRepository.salvar(boletim);
+					
 					boletim = criarBoletimExemplo();
 					BoletimRepository.salvar(boletim);
 
