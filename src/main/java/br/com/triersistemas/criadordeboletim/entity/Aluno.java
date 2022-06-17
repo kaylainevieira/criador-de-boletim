@@ -15,4 +15,9 @@ public class Aluno {
 		this.id = UUID.randomUUID();
 		this.nomeCompleto = nomeCompleto;
 	}
+
+	public Aluno editar(final String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
+		return this;
+	}
 }
