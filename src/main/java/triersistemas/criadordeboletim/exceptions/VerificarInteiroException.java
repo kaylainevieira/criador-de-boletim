@@ -1,4 +1,4 @@
-package br.com.kaylaine.criadordeboletim.exceptions;
+package br.com.triersistemas.criadordeboletim.exceptions;
 
 public class VerificarInteiroException extends RuntimeException{
 
