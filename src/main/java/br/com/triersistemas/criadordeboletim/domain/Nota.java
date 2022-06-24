@@ -1,9 +1,8 @@
-package br.com.triersistemas.criadordeboletim.entity;
+package br.com.triersistemas.criadordeboletim.domain;
 
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -28,5 +27,15 @@ public class Nota {
         this.materia = materia;
         this.valor = valor;
         this.data = LocalDateTime.now();
+    }
+
+    public Nota editar(final Aluno aluno,
+                final Materia materia,
+                final BigDecimal valor) {
+        this.aluno = aluno;
+        this.materia = materia;
+        this.valor = valor;
+        this.data = LocalDateTime.now();
+        return this;
     }
 }

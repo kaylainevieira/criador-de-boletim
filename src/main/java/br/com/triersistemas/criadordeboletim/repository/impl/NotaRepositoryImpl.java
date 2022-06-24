@@ -1,6 +1,6 @@
 package br.com.triersistemas.criadordeboletim.repository.impl;
 
-import br.com.triersistemas.criadordeboletim.entity.Nota;
+import br.com.triersistemas.criadordeboletim.domain.Nota;
 import br.com.triersistemas.criadordeboletim.repository.NotaRepository;
 import org.springframework.stereotype.Repository;
 

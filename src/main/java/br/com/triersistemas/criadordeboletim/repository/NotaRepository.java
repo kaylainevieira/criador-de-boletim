@@ -1,6 +1,6 @@
 package br.com.triersistemas.criadordeboletim.repository;
 
-import br.com.triersistemas.criadordeboletim.entity.Nota;
+import br.com.triersistemas.criadordeboletim.domain.Nota;
 
 import java.util.List;
 import java.util.Optional;

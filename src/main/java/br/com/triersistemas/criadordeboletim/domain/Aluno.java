@@ -1,4 +1,4 @@
-package br.com.triersistemas.criadordeboletim.entity;
+package br.com.triersistemas.criadordeboletim.domain;
 
 import lombok.Getter;
 

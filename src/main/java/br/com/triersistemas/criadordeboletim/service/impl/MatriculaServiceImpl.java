@@ -1,7 +1,7 @@
 package br.com.triersistemas.criadordeboletim.service.impl;
 
-import br.com.triersistemas.criadordeboletim.entity.Aluno;
-import br.com.triersistemas.criadordeboletim.entity.Matricula;
+import br.com.triersistemas.criadordeboletim.domain.Aluno;
+import br.com.triersistemas.criadordeboletim.domain.Matricula;
 import br.com.triersistemas.criadordeboletim.exceptions.NaoExisteException;
 import br.com.triersistemas.criadordeboletim.model.MatriculaModel;
 import br.com.triersistemas.criadordeboletim.repository.MatriculaRepository;
@@ -34,7 +34,6 @@ public class MatriculaServiceImpl implements MatriculaService {
 
     @Override
     public Matricula cadastrar(MatriculaModel model) {
-
         Aluno aluno = alunoService.consultarPor(model.getIdAluno());
 
         Matricula matricula = new Matricula(aluno,
@@ -45,12 +44,18 @@ public class MatriculaServiceImpl implements MatriculaService {
         return matricula;
     }
 
-//    @Override
-//    public Aluno alterar(UUID id, AlunoModel model) {
-//        Aluno aluno = this.consultarPor(id);
-//        aluno.editar(model.getNome(), model.getNiver(), model.getCpf(), model.getEmail());
-//        return aluno;
-//    }
+    @Override
+    public Matricula alterar(UUID id, MatriculaModel model) {
+        Matricula matricula = this.consultarPor(id);
+
+        Aluno aluno = alunoService.consultarPor(model.getIdAluno());
+
+        matricula.editar(aluno,
+                model.getUnidadeEscolar(), model.getMunicipio(),
+                model.getEtapa(), model.getTurma(), model.getTurno(),
+                model.getCurso(), model.getAvaliacao());
+        return matricula;
+    }
 
     @Override
     public Matricula remover(UUID id) {

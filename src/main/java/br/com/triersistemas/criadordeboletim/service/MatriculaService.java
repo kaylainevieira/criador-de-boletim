@@ -1,6 +1,6 @@
 package br.com.triersistemas.criadordeboletim.service;
 
-import br.com.triersistemas.criadordeboletim.entity.Matricula;
+import br.com.triersistemas.criadordeboletim.domain.Matricula;
 import br.com.triersistemas.criadordeboletim.model.MatriculaModel;
 
 import java.util.List;
@@ -13,5 +13,7 @@ public interface MatriculaService {
     Matricula consultarPor(UUID id);
 
     Matricula cadastrar(MatriculaModel model);
+
+    Matricula alterar(UUID id, MatriculaModel model);
     Matricula remover(UUID id);
 }

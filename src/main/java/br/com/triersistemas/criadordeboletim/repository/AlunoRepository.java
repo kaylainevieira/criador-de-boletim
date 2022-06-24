@@ -1,6 +1,6 @@
 package br.com.triersistemas.criadordeboletim.repository;
 
-import br.com.triersistemas.criadordeboletim.entity.Aluno;
+import br.com.triersistemas.criadordeboletim.domain.Aluno;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,9 +1,8 @@
-package br.com.triersistemas.criadordeboletim.entity;
+package br.com.triersistemas.criadordeboletim.domain;
 
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -51,6 +50,26 @@ public class Matricula {
 		this.curso = curso;
 		this.ano = LocalDate.now().getYear();
 		this.avaliacao = avaliacao;
+	}
+
+	public Matricula editar(Aluno aluno,
+					 String unidadeEscolar,
+					 String municipio,
+					 Integer etapa,
+					 Integer turma,
+					 String turno,
+					 String curso,
+					 Integer avaliacao) {
+		this.aluno = aluno;
+		this.unidadeEscolar = unidadeEscolar;
+		this.municipio = municipio;
+		this.etapa = etapa;
+		this.turma = turma;
+		this.turno = turno;
+		this.curso = curso;
+		this.ano = LocalDate.now().getYear();
+		this.avaliacao = avaliacao;
+		return this;
 	}
 
 }

@@ -1,7 +1,7 @@
 package br.com.triersistemas.criadordeboletim.repository.impl;
 
 
-import br.com.triersistemas.criadordeboletim.entity.Aluno;
+import br.com.triersistemas.criadordeboletim.domain.Aluno;
 import br.com.triersistemas.criadordeboletim.repository.AlunoRepository;
 import org.springframework.stereotype.Repository;
 

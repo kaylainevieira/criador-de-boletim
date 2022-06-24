@@ -1,8 +1,8 @@
 package br.com.triersistemas.criadordeboletim.service.impl;
 
-import br.com.triersistemas.criadordeboletim.entity.Aluno;
-import br.com.triersistemas.criadordeboletim.entity.Materia;
-import br.com.triersistemas.criadordeboletim.entity.Nota;
+import br.com.triersistemas.criadordeboletim.domain.Aluno;
+import br.com.triersistemas.criadordeboletim.domain.Materia;
+import br.com.triersistemas.criadordeboletim.domain.Nota;
 import br.com.triersistemas.criadordeboletim.exceptions.NaoExisteException;
 import br.com.triersistemas.criadordeboletim.model.NotaModel;
 import br.com.triersistemas.criadordeboletim.repository.NotaRepository;
@@ -47,12 +47,16 @@ public class NotaServiceImpl implements NotaService {
         return nota;
     }
 
-//    @Override
-//    public Aluno alterar(UUID id, AlunoModel model) {
-//        Aluno aluno = this.consultarPor(id);
-//        aluno.editar(model.getNome(), model.getNiver(), model.getCpf(), model.getEmail());
-//        return aluno;
-//    }
+    @Override
+    public Nota alterar(UUID id, NotaModel model) {
+        Nota nota = this.consultarPor(id);
+
+        Aluno aluno = alunoService.consultarPor(model.getIdAluno());
+        Materia materia = materiaService.consultarPor(model.getIdMateria());
+
+        nota.editar(aluno, materia, model.getValor());
+        return nota;
+    }
 
     @Override
     public Nota remover(UUID id) {

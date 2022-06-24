@@ -1,10 +1,7 @@
-package br.com.triersistemas.criadordeboletim.entity;
+package br.com.triersistemas.criadordeboletim.domain;
 
 import lombok.Getter;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -17,6 +14,11 @@ public class Materia {
 	public Materia(final String nome) {
 		this.id = UUID.randomUUID();
 		this.nome = nome;;
+	}
+
+	public Materia editar(final String nome) {
+		this.nome = nome;
+		return this;
 	}
 
 //	public BigDecimal getMediaFinal() {

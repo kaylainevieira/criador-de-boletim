@@ -1,7 +1,6 @@
 package br.com.triersistemas.criadordeboletim.service.impl;
 
-import br.com.triersistemas.criadordeboletim.entity.Materia;
-import br.com.triersistemas.criadordeboletim.entity.Nota;
+import br.com.triersistemas.criadordeboletim.domain.Materia;
 import br.com.triersistemas.criadordeboletim.exceptions.NaoExisteException;
 import br.com.triersistemas.criadordeboletim.model.MateriaModel;
 import br.com.triersistemas.criadordeboletim.repository.MateriaRepository;
@@ -35,12 +34,12 @@ public class MateriaServiceImpl implements MateriaService {
         return materia;
     }
 
-//    @Override
-//    public Aluno alterar(UUID id, AlunoModel model) {
-//        Aluno aluno = this.consultarPor(id);
-//        aluno.editar(model.getNome(), model.getNiver(), model.getCpf(), model.getEmail());
-//        return aluno;
-//    }
+    @Override
+    public Materia alterar(UUID id, MateriaModel model) {
+        Materia materia = this.consultarPor(id);
+        materia.editar(model.getNome());
+        return materia;
+    }
 
     @Override
     public Materia remover(UUID id) {
