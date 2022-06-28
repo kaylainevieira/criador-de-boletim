@@ -10,7 +10,6 @@ import java.util.UUID;
 public class MatriculaModel {
 
     @NotNull(message = "O id do aluno é obrigatória.")
-    @NotBlank(message = "O id do aluno é obrigatório.")
     private UUID idAluno;
 
     @NotNull(message = "A unidade escolar é obrigatória.")
@@ -26,13 +25,11 @@ public class MatriculaModel {
     private String municipio;
 
     @NotNull(message = "A etapa é obrigatória.")
-    @NotBlank(message = "A etapa é obrigatória.")
     @Min(1)
     @Max(9)
     private Integer etapa;
 
     @NotNull(message = "A turma é obrigatória.")
-    @NotBlank(message = "A turma é obrigatória.")
     private Integer turma;
 
     @NotNull(message = "O turno é obrigatório.")
@@ -48,7 +45,6 @@ public class MatriculaModel {
     private String curso;
 
     @NotNull(message = "A avaliação é obrigatória.")
-    @NotBlank(message = "A avaliação é obrigatória.")
     @Min(1)
     @Max(4)
     private Integer avaliacao;
