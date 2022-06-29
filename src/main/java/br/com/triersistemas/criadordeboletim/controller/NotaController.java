@@ -22,6 +22,11 @@ public class NotaController {
         return notaService.consultar();
     }
 
+    @GetMapping("/boletim/{avaliacao}/{idAluno}")
+    public List<Nota> boletim(@PathVariable Integer avaliacao, @PathVariable UUID idAluno) {
+        return notaService.boletim(avaliacao, idAluno);
+    }
+
     @PostMapping("/cadastrar")
     public Nota cadastrar(@RequestBody @Valid NotaModel model) {
         return notaService.cadastrar(model);

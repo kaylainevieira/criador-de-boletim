@@ -43,9 +43,4 @@ public class MatriculaModel {
     @Pattern(regexp = "[A-Za-zÀ-ú]{2,30}",
             message = "O curso deve ter entre 2 e 30 caracteres literais.")
     private String curso;
-
-    @NotNull(message = "A avaliação é obrigatória.")
-    @Min(1)
-    @Max(4)
-    private Integer avaliacao;
 }

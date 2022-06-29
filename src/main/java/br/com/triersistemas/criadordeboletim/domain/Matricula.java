@@ -26,8 +26,6 @@ public class Matricula {
 	
 	private Integer ano;
 	
-	private Integer avaliacao;
-	
 	public Matricula() {
 		super();
 	}
@@ -38,8 +36,7 @@ public class Matricula {
 					 Integer etapa,
 					 Integer turma,
 					 String turno,
-					 String curso,
-					 Integer avaliacao) {
+					 String curso) {
 		this.id = UUID.randomUUID();
 		this.aluno = aluno;
 		this.unidadeEscolar = unidadeEscolar;
@@ -49,7 +46,6 @@ public class Matricula {
 		this.turno = turno;
 		this.curso = curso;
 		this.ano = LocalDate.now().getYear();
-		this.avaliacao = avaliacao;
 	}
 
 	public Matricula editar(Aluno aluno,
@@ -58,8 +54,7 @@ public class Matricula {
 					 Integer etapa,
 					 Integer turma,
 					 String turno,
-					 String curso,
-					 Integer avaliacao) {
+					 String curso) {
 		this.aluno = aluno;
 		this.unidadeEscolar = unidadeEscolar;
 		this.municipio = municipio;
@@ -68,7 +63,6 @@ public class Matricula {
 		this.turno = turno;
 		this.curso = curso;
 		this.ano = LocalDate.now().getYear();
-		this.avaliacao = avaliacao;
 		return this;
 	}
 

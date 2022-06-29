@@ -39,7 +39,7 @@ public class MatriculaServiceImpl implements MatriculaService {
         Matricula matricula = new Matricula(aluno,
                 model.getUnidadeEscolar(), model.getMunicipio(),
                 model.getEtapa(), model.getTurma(), model.getTurno(),
-                model.getCurso(), model.getAvaliacao());
+                model.getCurso());
         matriculaRepository.cadastrar(matricula);
         return matricula;
     }
@@ -52,8 +52,7 @@ public class MatriculaServiceImpl implements MatriculaService {
 
         matricula.editar(aluno,
                 model.getUnidadeEscolar(), model.getMunicipio(),
-                model.getEtapa(), model.getTurma(), model.getTurno(),
-                model.getCurso(), model.getAvaliacao());
+                model.getEtapa(), model.getTurma(), model.getTurno(), model.getCurso());
         return matricula;
     }
 

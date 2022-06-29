@@ -33,6 +33,11 @@ public class NotaServiceImpl implements NotaService {
     }
 
     @Override
+    public List<Nota> boletim(Integer avaliacao, UUID idAluno){
+        return notaRepository.boletim(avaliacao, idAluno);
+    }
+
+    @Override
     public Nota consultarPor(UUID id) {
         return notaRepository.consultarPor(id).orElseThrow(NaoExisteException::new);
     }
@@ -42,7 +47,7 @@ public class NotaServiceImpl implements NotaService {
         Aluno aluno = alunoService.consultarPor(model.getIdAluno());
         Materia materia = materiaService.consultarPor(model.getIdMateria());
 
-        Nota nota = new Nota(aluno, materia, model.getValor());
+        Nota nota = new Nota(aluno, materia, model.getValor(), model.getAvaliacao());
         notaRepository.cadastrar(nota);
         return nota;
     }
@@ -54,7 +59,7 @@ public class NotaServiceImpl implements NotaService {
         Aluno aluno = alunoService.consultarPor(model.getIdAluno());
         Materia materia = materiaService.consultarPor(model.getIdMateria());
 
-        nota.editar(aluno, materia, model.getValor());
+        nota.editar(aluno, materia, model.getValor(), model.getAvaliacao());
         return nota;
     }
 

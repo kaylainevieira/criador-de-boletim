@@ -9,7 +9,6 @@ import java.util.UUID;
 public interface MatriculaService {
 
     List<Matricula> consultar();
-
     Matricula consultarPor(UUID id);
 
     Matricula cadastrar(MatriculaModel model);

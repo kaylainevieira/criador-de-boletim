@@ -22,4 +22,9 @@ public class NotaModel {
     @Min(0)
     @Max(10)
     private BigDecimal valor;
+
+    @NotNull(message = "A avaliação é obrigatório.")
+    @Min(1)
+    @Max(4)
+    private Integer avaliacao;
 }
