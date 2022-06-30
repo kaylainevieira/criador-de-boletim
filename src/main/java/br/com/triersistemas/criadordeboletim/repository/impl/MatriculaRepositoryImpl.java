@@ -21,16 +21,21 @@ public class MatriculaRepositoryImpl implements MatriculaRepository {
 
     @Override
     public Optional<Matricula> consultarPor(UUID id) {
-        return LIST.stream().filter(boletim -> id.equals(boletim.getId())).findFirst();
+        return LIST.stream().filter(matricula -> id.equals(matricula.getId())).findFirst();
     }
 
     @Override
-    public void cadastrar(Matricula boletim) {
-        LIST.add(boletim);
+    public Optional<Matricula> consultarPorAluno(UUID idAluno) {
+        return LIST.stream().filter(matricula -> idAluno.equals(matricula.getAluno().getId())).findFirst();
     }
 
     @Override
-    public void remover(Matricula boletim) {
-        LIST.remove(boletim);
+    public void cadastrar(Matricula matricula) {
+        LIST.add(matricula);
+    }
+
+    @Override
+    public void remover(Matricula matricula) {
+        LIST.remove(matricula);
     }
 }

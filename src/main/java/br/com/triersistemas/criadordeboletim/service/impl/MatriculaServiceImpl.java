@@ -33,6 +33,11 @@ public class MatriculaServiceImpl implements MatriculaService {
     }
 
     @Override
+    public Matricula consultarPorAluno(UUID idAluno) {
+        return matriculaRepository.consultarPorAluno(idAluno).orElseThrow(NaoExisteException::new);
+    }
+
+    @Override
     public Matricula cadastrar(MatriculaModel model) {
         Aluno aluno = alunoService.consultarPor(model.getIdAluno());
 

@@ -17,6 +17,11 @@ public class MatriculaController {
     @Autowired
     private MatriculaService matriculaService;
 
+    @GetMapping("/consultarPorAluno/{idAluno}")
+    public Matricula consultarPorAluno(@PathVariable UUID idAluno) {
+        return matriculaService.consultarPorAluno(idAluno);
+    }
+
     @GetMapping("/consultar")
     public List<Matricula> consultar() {
         return matriculaService.consultar();

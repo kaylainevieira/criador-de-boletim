@@ -10,6 +10,8 @@ public interface MatriculaRepository {
 
     List<Matricula> consultar();
     Optional<Matricula> consultarPor(UUID id);
-    void cadastrar(Matricula boletim);
-    void remover(Matricula boletim);
+
+    Optional<Matricula> consultarPorAluno(UUID idAluno);
+    void cadastrar(Matricula matricula);
+    void remover(Matricula matricula);
 }
