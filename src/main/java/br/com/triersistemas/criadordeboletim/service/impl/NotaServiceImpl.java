@@ -27,6 +27,7 @@ public class NotaServiceImpl implements NotaService {
     @Autowired
     private MateriaService materiaService;
 
+       /*
     @Override
     public List<Nota> consultar() {
         return notaRepository.consultar();
@@ -41,6 +42,7 @@ public class NotaServiceImpl implements NotaService {
     public Nota consultarPor(UUID id) {
         return notaRepository.consultarPor(id).orElseThrow(NaoExisteException::new);
     }
+
 
     @Override
     public Nota cadastrar(NotaModel model) {
@@ -68,5 +70,5 @@ public class NotaServiceImpl implements NotaService {
         Nota nota = this.consultarPor(id);
         notaRepository.remover(nota);
         return nota;
-    }
+    }*/
 }

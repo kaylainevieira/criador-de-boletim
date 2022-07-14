@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface MatriculaService {
 
-    List<Matricula> consultar();
+    /*List<Matricula> consultar();
     Matricula consultarPor(UUID id);
 
     Matricula consultarPorAluno(UUID idAluno);
@@ -17,4 +17,6 @@ public interface MatriculaService {
 
     Matricula alterar(UUID id, MatriculaModel model);
     Matricula remover(UUID id);
+    */
+
 }

@@ -21,7 +21,7 @@ public class MatriculaServiceImpl implements MatriculaService {
 
     @Autowired
     private AlunoService alunoService;
-
+/*
     @Override
     public List<Matricula> consultar() {
         return matriculaRepository.consultar();
@@ -67,4 +67,6 @@ public class MatriculaServiceImpl implements MatriculaService {
         matriculaRepository.remover(matricula);
         return matricula;
     }
+    */
+
 }

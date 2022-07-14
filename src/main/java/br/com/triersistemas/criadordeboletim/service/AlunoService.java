@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public interface AlunoService {
 
-    List<Aluno> consultar();
-    Aluno consultarPor(UUID id);
-    Aluno cadastrar(AlunoModel model);
-    Aluno alterar(UUID id, AlunoModel model);
-    Aluno remover(UUID id);
+    List<AlunoModel> consultar();
+    AlunoModel consultarPor(UUID id);
+    AlunoModel cadastrar(AlunoModel model);
+    AlunoModel alterar(AlunoModel model);
+    AlunoModel remover(UUID id);
 }

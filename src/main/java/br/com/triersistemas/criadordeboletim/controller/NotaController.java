@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/nota")
 public class NotaController {
-
+/*
     @Autowired
     private NotaService notaService;
 
@@ -41,4 +41,6 @@ public class NotaController {
     public Nota remover(@PathVariable UUID id) {
         return notaService.remover(id);
     }
+
+ */
 }

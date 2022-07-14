@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/matricula")
 public class MatriculaController {
-
+/*
     @Autowired
     private MatriculaService matriculaService;
 
@@ -41,4 +41,6 @@ public class MatriculaController {
     public Matricula remover(@PathVariable UUID id) {
         return matriculaService.remover(id);
     }
+
+ */
 }

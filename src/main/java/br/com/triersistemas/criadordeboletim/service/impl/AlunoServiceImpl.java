@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AlunoServiceImpl implements AlunoService {
@@ -18,33 +19,36 @@ public class AlunoServiceImpl implements AlunoService {
     private AlunoRepository alunoRepository;
 
     @Override
-    public List<Aluno> consultar() {
-        return alunoRepository.consultar();
+    public List<AlunoModel> consultar() {
+        return alunoRepository.findAll().stream().map(AlunoModel::new).collect(Collectors.toList());
     }
 
     @Override
-    public Aluno consultarPor(UUID id) {
-        return alunoRepository.consultarPor(id).orElseThrow(NaoExisteException::new);
+    public AlunoModel consultarPor(UUID id) {
+        return new AlunoModel(this.buscaPorId(id));
     }
 
     @Override
-    public Aluno cadastrar(AlunoModel model) {
-        Aluno aluno = new Aluno(model.getNomeCompleto());
-        alunoRepository.cadastrar(aluno);
-        return aluno;
+    public AlunoModel cadastrar(AlunoModel model) {
+        Aluno aluno = new Aluno(model);
+        return new AlunoModel(alunoRepository.save(aluno));
     }
 
     @Override
-    public Aluno alterar(UUID id, AlunoModel model) {
-        Aluno aluno = this.consultarPor(id);
+    public AlunoModel alterar(AlunoModel model) {
+        Aluno aluno = this.buscaPorId(model.getId());
         aluno.editar(model.getNomeCompleto());
-        return aluno;
+        return new AlunoModel(this.alunoRepository.save(aluno));
     }
 
     @Override
-    public Aluno remover(UUID id) {
-        Aluno aluno = this.consultarPor(id);
-        alunoRepository.remover(aluno);
-        return aluno;
+    public AlunoModel remover(UUID id) {
+        Aluno aluno = this.buscaPorId(id);
+        alunoRepository.delete(aluno);
+        return new AlunoModel(aluno);
+    }
+
+    private Aluno buscaPorId(UUID id) {
+        return this.alunoRepository.findById(id).orElseThrow(NaoExisteException::new);
     }
 }

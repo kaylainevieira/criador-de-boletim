@@ -18,22 +18,26 @@ public class AlunoController {
     private AlunoService alunoService;
 
     @GetMapping("/consultar")
-    public List<Aluno> consultar() {
+    public List<AlunoModel> consultar() {
         return alunoService.consultar();
     }
 
+    @GetMapping("/consultar-por-id/{id}")
+    public AlunoModel consultarPorId(@PathVariable UUID id) {
+        return alunoService.consultarPor(id);
+    }
     @PostMapping("/cadastrar")
-    public Aluno cadastrar(@RequestBody @Valid AlunoModel model) {
+    public AlunoModel cadastrar(@RequestBody @Valid AlunoModel model) {
         return alunoService.cadastrar(model);
     }
 
-    @PutMapping("/alterar/{id}")
-    public Aluno alterar(@PathVariable UUID id, @RequestBody @Valid AlunoModel model) {
-        return alunoService.alterar(id, model);
+    @PutMapping("/alterar")
+    public AlunoModel alterar(@RequestBody @Valid AlunoModel model) {
+        return alunoService.alterar(model);
     }
 
     @DeleteMapping("/remover/{id}")
-    public Aluno remover(@PathVariable UUID id) {
+    public AlunoModel remover(@PathVariable UUID id) {
         return alunoService.remover(id);
     }
 }
