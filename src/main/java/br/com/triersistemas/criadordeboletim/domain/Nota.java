@@ -1,18 +1,33 @@
 package br.com.triersistemas.criadordeboletim.domain;
 
+import br.com.triersistemas.criadordeboletim.model.NotaModel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
+@Table(name = "nota")
+@NoArgsConstructor
 @Getter
 public class Nota {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id",
+            insertable = false, updatable = false,
+            nullable = false, unique = true)
     private UUID id;
 
+    @ManyToOne
+    @JoinColumn(name = "aluno_id", referencedColumnName = "id")
     private Aluno aluno;
 
+    @ManyToOne
+    @JoinColumn(name = "materia_id", referencedColumnName = "id")
     private Materia materia;
 
     private BigDecimal valor;
@@ -20,12 +35,7 @@ public class Nota {
     private Integer avaliacao;
 
     private LocalDateTime data;
-
-    public Nota(final Aluno aluno,
-                final Materia materia,
-                final BigDecimal valor,
-                final Integer avaliacao) {
-        this.id = UUID.randomUUID();
+    public Nota(Aluno aluno, Materia materia, BigDecimal valor, Integer avaliacao, LocalDateTime data) {
         this.aluno = aluno;
         this.materia = materia;
         this.valor = valor;
@@ -34,9 +44,9 @@ public class Nota {
     }
 
     public Nota editar(final Aluno aluno,
-                final Materia materia,
-                final BigDecimal valor,
-                final Integer avaliacao) {
+                       final Materia materia,
+                       final BigDecimal valor,
+                       final Integer avaliacao) {
         this.aluno = aluno;
         this.materia = materia;
         this.valor = valor;

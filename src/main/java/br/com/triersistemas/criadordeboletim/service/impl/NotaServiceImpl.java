@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class NotaServiceImpl implements NotaService {
@@ -22,53 +23,59 @@ public class NotaServiceImpl implements NotaService {
     private NotaRepository notaRepository;
 
     @Autowired
-    private AlunoService alunoService;
+    private AlunoServiceImpl alunoService;
 
     @Autowired
-    private MateriaService materiaService;
+    private MateriaServiceImpl materiaService;
 
-       /*
+
     @Override
-    public List<Nota> consultar() {
-        return notaRepository.consultar();
+    public List<NotaModel> consultar() {
+        return notaRepository.findAll().stream().map(NotaModel::new).collect(Collectors.toList());
+    }
+
+    /*
+    @Override
+    public List<NotaModel> boletim(Integer avaliacao, UUID idAluno){
+        return notaRepository.findAll().stream().filter(nota -> nota.getAvaliacao().equals(avaliacao)
+                && nota.getAluno().getId().equals(idAluno)).collect(Collectors.toList());
+    }*/
+
+    @Override
+    public NotaModel consultarPor(UUID id) {
+        return new NotaModel(this.buscarPorId(id));
+    }
+
+
+    @Override
+    public NotaModel cadastrar(NotaModel model) {
+        Aluno aluno = alunoService.consultarAluno(model.getAluno().getId());
+        Materia materia = materiaService.consultarMateria(model.getMateria().getId());
+
+        Nota nota = new Nota(aluno, materia, model.getValor(), model.getAvaliacao(), model.getData());
+        return new NotaModel(notaRepository.save(nota));
     }
 
     @Override
-    public List<Nota> boletim(Integer avaliacao, UUID idAluno){
-        return notaRepository.boletim(avaliacao, idAluno);
-    }
+    public NotaModel alterar(NotaModel model) {
+        Nota nota = this.buscarPorId(model.getId());
 
-    @Override
-    public Nota consultarPor(UUID id) {
-        return notaRepository.consultarPor(id).orElseThrow(NaoExisteException::new);
-    }
-
-
-    @Override
-    public Nota cadastrar(NotaModel model) {
-        Aluno aluno = alunoService.consultarPor(model.getIdAluno());
-        Materia materia = materiaService.consultarPor(model.getIdMateria());
-
-        Nota nota = new Nota(aluno, materia, model.getValor(), model.getAvaliacao());
-        notaRepository.cadastrar(nota);
-        return nota;
-    }
-
-    @Override
-    public Nota alterar(UUID id, NotaModel model) {
-        Nota nota = this.consultarPor(id);
-
-        Aluno aluno = alunoService.consultarPor(model.getIdAluno());
-        Materia materia = materiaService.consultarPor(model.getIdMateria());
+        Aluno aluno = alunoService.consultarAluno(model.getAluno().getId());
+        Materia materia = materiaService.consultarMateria(model.getMateria().getId());
 
         nota.editar(aluno, materia, model.getValor(), model.getAvaliacao());
-        return nota;
+        return new NotaModel(notaRepository.save(nota));
     }
 
     @Override
-    public Nota remover(UUID id) {
-        Nota nota = this.consultarPor(id);
-        notaRepository.remover(nota);
-        return nota;
-    }*/
+    public NotaModel remover(UUID id) {
+        Nota nota = this.buscarPorId(id);
+        notaRepository.delete(nota);
+        return new NotaModel(nota);
+    }
+
+    public Nota buscarPorId(UUID id) {
+        return notaRepository.findById(id).orElseThrow(NaoExisteException::new);
+    }
+
 }

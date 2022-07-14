@@ -9,17 +9,16 @@ import java.util.List;
 import java.util.UUID;
 
 public interface NotaService {
-    /*
 
-    List<Nota> consultar();
 
-    List<Nota> boletim(Integer avaliacao, UUID idAluno);
+    List<NotaModel> consultar();
 
-    Nota consultarPor(UUID id);
-    Nota cadastrar(NotaModel model);
+    //List<NotaModel> boletim(Integer avaliacao, UUID idAluno);
 
-    Nota alterar(UUID id, NotaModel model);
-    Nota remover(UUID id);
+    NotaModel consultarPor(UUID id);
+    NotaModel cadastrar(NotaModel model);
 
-     */
+    NotaModel alterar(NotaModel model);
+    NotaModel remover(UUID id);
+
 }

@@ -18,6 +18,10 @@ public class AlunoServiceImpl implements AlunoService {
     @Autowired
     private AlunoRepository alunoRepository;
 
+    protected Aluno consultarAluno(UUID id) {
+        return this.buscarPorId(id);
+    }
+
     @Override
     public List<AlunoModel> consultar() {
         return alunoRepository.findAll().stream().map(AlunoModel::new).collect(Collectors.toList());

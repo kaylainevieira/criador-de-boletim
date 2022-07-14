@@ -13,34 +13,36 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/nota")
 public class NotaController {
-/*
+
     @Autowired
     private NotaService notaService;
 
+    @GetMapping("/consultar-por-id/{id}")
+    public NotaModel consultarPor(@PathVariable UUID id) {
+        return notaService.consultarPor(id);
+    }
     @GetMapping("/consultar")
-    public List<Nota> consultar() {
+    public List<NotaModel> consultar() {
         return notaService.consultar();
     }
-
+/*
     @GetMapping("/boletim/{avaliacao}/{idAluno}")
-    public List<Nota> boletim(@PathVariable Integer avaliacao, @PathVariable UUID idAluno) {
+    public List<NotaModel> boletim(@PathVariable Integer avaliacao, @PathVariable UUID idAluno) {
         return notaService.boletim(avaliacao, idAluno);
     }
-
+*/
     @PostMapping("/cadastrar")
-    public Nota cadastrar(@RequestBody @Valid NotaModel model) {
+    public NotaModel cadastrar(@RequestBody @Valid NotaModel model) {
         return notaService.cadastrar(model);
     }
 
-    @PutMapping("/alterar/{id}")
-    public Nota alterar(@PathVariable UUID id, @RequestBody @Valid NotaModel model) {
-        return notaService.alterar(id, model);
+    @PutMapping("/alterar")
+    public NotaModel alterar(@RequestBody @Valid NotaModel model) {
+        return notaService.alterar(model);
     }
 
     @DeleteMapping("/remover/{id}")
-    public Nota remover(@PathVariable UUID id) {
+    public NotaModel remover(@PathVariable UUID id) {
         return notaService.remover(id);
     }
-
- */
 }

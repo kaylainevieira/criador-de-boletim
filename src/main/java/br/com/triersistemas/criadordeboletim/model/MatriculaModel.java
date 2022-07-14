@@ -1,12 +1,14 @@
 package br.com.triersistemas.criadordeboletim.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.*;
 import java.util.UUID;
 
 @Getter
+@NoArgsConstructor
 public class MatriculaModel {
 
     @NotNull(message = "O id do aluno é obrigatória.")
