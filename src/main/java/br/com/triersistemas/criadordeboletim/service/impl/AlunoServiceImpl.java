@@ -25,7 +25,7 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public AlunoModel consultarPor(UUID id) {
-        return new AlunoModel(this.buscaPorId(id));
+        return new AlunoModel(this.buscarPorId(id));
     }
 
     @Override
@@ -36,19 +36,19 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public AlunoModel alterar(AlunoModel model) {
-        Aluno aluno = this.buscaPorId(model.getId());
+        Aluno aluno = this.buscarPorId(model.getId());
         aluno.editar(model.getNomeCompleto());
         return new AlunoModel(this.alunoRepository.save(aluno));
     }
 
     @Override
     public AlunoModel remover(UUID id) {
-        Aluno aluno = this.buscaPorId(id);
+        Aluno aluno = this.buscarPorId(id);
         alunoRepository.delete(aluno);
         return new AlunoModel(aluno);
     }
 
-    private Aluno buscaPorId(UUID id) {
+    private Aluno buscarPorId(UUID id) {
         return this.alunoRepository.findById(id).orElseThrow(NaoExisteException::new);
     }
 }

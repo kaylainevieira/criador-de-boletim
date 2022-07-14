@@ -1,0 +1,4 @@
+CREATE TABLE materia(
+    id UUID PRIMARY KEY,
+    nome VARCHAR(30) NOT NULL
+);

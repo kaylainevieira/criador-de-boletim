@@ -8,10 +8,10 @@ import java.util.UUID;
 
 public interface MateriaService {
 
-    List<Materia> consultar();
-    Materia consultarPor(UUID id);
-    Materia cadastrar(MateriaModel model);
+    List<MateriaModel> consultar();
+    MateriaModel consultarPor(UUID id);
+    MateriaModel cadastrar(MateriaModel model);
 
-    Materia alterar(UUID id, MateriaModel model);
-    Materia remover(UUID id);
+    MateriaModel alterar(MateriaModel model);
+    MateriaModel remover(UUID id);
 }

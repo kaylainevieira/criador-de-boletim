@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class MateriaServiceImpl implements MateriaService {
@@ -18,33 +19,36 @@ public class MateriaServiceImpl implements MateriaService {
     private MateriaRepository materiaRepository;
 
     @Override
-    public List<Materia> consultar() {
-        return materiaRepository.consultar();
+    public List<MateriaModel> consultar() {
+        return materiaRepository.findAll().stream().map(MateriaModel::new).collect(Collectors.toList());
     }
 
     @Override
-    public Materia consultarPor(UUID id) {
-        return materiaRepository.consultarPor(id).orElseThrow(NaoExisteException::new);
+    public MateriaModel consultarPor(UUID id) {
+        return new MateriaModel(this.buscarPorId(id));
     }
 
     @Override
-    public Materia cadastrar(MateriaModel model) {
-        Materia materia = new Materia(model.getNome());
-        materiaRepository.cadastrar(materia);
-        return materia;
+    public MateriaModel cadastrar(MateriaModel model) {
+        Materia materia = new Materia(model);
+        return new MateriaModel(materiaRepository.save(materia));
     }
 
     @Override
-    public Materia alterar(UUID id, MateriaModel model) {
-        Materia materia = this.consultarPor(id);
+    public MateriaModel alterar(MateriaModel model) {
+        Materia materia = this.buscarPorId(model.getId());
         materia.editar(model.getNome());
-        return materia;
+        return new MateriaModel(materiaRepository.save(materia));
     }
 
     @Override
-    public Materia remover(UUID id) {
-        Materia materia = this.consultarPor(id);
-        materiaRepository.remover(materia);
-        return materia;
+    public MateriaModel remover(UUID id) {
+        Materia materia = this.buscarPorId(id);
+        materiaRepository.delete(materia);
+        return new MateriaModel(materia);
+    }
+
+    public Materia buscarPorId(UUID id) {
+        return materiaRepository.findById(id).orElseThrow(NaoExisteException::new);
     }
 }

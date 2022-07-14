@@ -18,22 +18,27 @@ public class MateriaController {
     private MateriaService materiaService;
 
     @GetMapping("/consultar")
-    public List<Materia> consultar() {
+    public List<MateriaModel> consultar() {
         return materiaService.consultar();
     }
 
+    @GetMapping("/consultar-por-id/{id}")
+    public MateriaModel consultarPor(@PathVariable UUID id) {
+        return materiaService.consultarPor(id);
+    }
+
     @PostMapping("/cadastrar")
-    public Materia cadastrar(@RequestBody @Valid MateriaModel model) {
+    public MateriaModel cadastrar(@RequestBody @Valid MateriaModel model) {
         return materiaService.cadastrar(model);
     }
 
-    @PutMapping("/alterar/{id}")
-    public Materia alterar(@PathVariable UUID id, @RequestBody @Valid MateriaModel model) {
-        return materiaService.alterar(id, model);
+    @PutMapping("/alterar")
+    public MateriaModel alterar(@RequestBody @Valid MateriaModel model) {
+        return materiaService.alterar(model);
     }
 
     @DeleteMapping("/remover/{id}")
-    public Materia remover(@PathVariable UUID id) {
+    public MateriaModel remover(@PathVariable UUID id) {
         return materiaService.remover(id);
     }
 }
