@@ -1,10 +1,9 @@
 package br.com.triersistemas.criadordeboletim.service;
 
-import br.com.triersistemas.criadordeboletim.domain.Aluno;
-import br.com.triersistemas.criadordeboletim.domain.Matricula;
 import br.com.triersistemas.criadordeboletim.domain.Nota;
 import br.com.triersistemas.criadordeboletim.model.NotaModel;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,5 +19,7 @@ public interface NotaService {
 
     NotaModel alterar(NotaModel model);
     NotaModel remover(UUID id);
+
+    List<NotaModel> findByNotaGreaterThanEqual(BigDecimal valor);
 
 }

@@ -40,4 +40,9 @@ public class AlunoController {
     public AlunoModel remover(@PathVariable UUID id) {
         return alunoService.remover(id);
     }
+
+    @GetMapping          ("/buscar-pelo-nome/{nome}")
+    public List<AlunoModel> buscarPeloNome(@PathVariable String nome) {
+        return alunoService.buscarPeloNome(nome);
+    }
 }

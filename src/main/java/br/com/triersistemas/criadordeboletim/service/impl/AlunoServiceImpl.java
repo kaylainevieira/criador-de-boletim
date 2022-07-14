@@ -52,6 +52,11 @@ public class AlunoServiceImpl implements AlunoService {
         return new AlunoModel(aluno);
     }
 
+    @Override
+    public List<AlunoModel> buscarPeloNome(String nome) {
+        return alunoRepository.buscarPeloNome(nome).stream().map(AlunoModel::new).toList();
+    }
+
     private Aluno buscarPorId(UUID id) {
         return this.alunoRepository.findById(id).orElseThrow(NaoExisteException::new);
     }

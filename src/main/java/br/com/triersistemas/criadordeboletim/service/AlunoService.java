@@ -13,4 +13,6 @@ public interface AlunoService {
     AlunoModel cadastrar(AlunoModel model);
     AlunoModel alterar(AlunoModel model);
     AlunoModel remover(UUID id);
+
+    List<AlunoModel> buscarPeloNome(String nome);
 }

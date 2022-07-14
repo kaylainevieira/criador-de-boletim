@@ -6,12 +6,11 @@ import br.com.triersistemas.criadordeboletim.domain.Nota;
 import br.com.triersistemas.criadordeboletim.exceptions.NaoExisteException;
 import br.com.triersistemas.criadordeboletim.model.NotaModel;
 import br.com.triersistemas.criadordeboletim.repository.NotaRepository;
-import br.com.triersistemas.criadordeboletim.service.AlunoService;
-import br.com.triersistemas.criadordeboletim.service.MateriaService;
 import br.com.triersistemas.criadordeboletim.service.NotaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -72,6 +71,11 @@ public class NotaServiceImpl implements NotaService {
         Nota nota = this.buscarPorId(id);
         notaRepository.delete(nota);
         return new NotaModel(nota);
+    }
+
+    @Override
+    public List<NotaModel> findByNotaGreaterThanEqual(BigDecimal valor) {
+        return notaRepository.findByValorGreaterThanEqual(valor).stream().map(NotaModel::new).toList();
     }
 
     public Nota buscarPorId(UUID id) {

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,5 +45,10 @@ public class NotaController {
     @DeleteMapping("/remover/{id}")
     public NotaModel remover(@PathVariable UUID id) {
         return notaService.remover(id);
+    }
+
+    @GetMapping("/valor-maior-ou-igual-a/{valor}")
+    public List<NotaModel> findByNotaGreaterThanEqual(@PathVariable BigDecimal valor) {
+        return notaService.findByNotaGreaterThanEqual(valor);
     }
 }
