@@ -1,6 +1,5 @@
 package br.com.triersistemas.criadordeboletim.controller;
 
-import br.com.triersistemas.criadordeboletim.domain.Aluno;
 import br.com.triersistemas.criadordeboletim.model.AlunoModel;
 import br.com.triersistemas.criadordeboletim.service.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,7 @@ public class AlunoController {
     }
 
     @GetMapping          ("/buscar-pelo-nome/{nome}")
-    public List<AlunoModel> buscarPeloNome(@PathVariable String nome) {
-        return alunoService.buscarPeloNome(nome);
+    public List<AlunoModel> buscarPeloNomeSQL(@PathVariable String nome) {
+        return alunoService.buscarPeloNomeSQL(nome);
     }
 }

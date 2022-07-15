@@ -2,7 +2,6 @@ package br.com.triersistemas.criadordeboletim.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.*;
 import java.util.UUID;

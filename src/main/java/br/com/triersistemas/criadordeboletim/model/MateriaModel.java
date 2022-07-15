@@ -3,12 +3,9 @@ package br.com.triersistemas.criadordeboletim.model;
 import br.com.triersistemas.criadordeboletim.domain.Materia;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter

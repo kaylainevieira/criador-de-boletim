@@ -1,6 +1,5 @@
 package br.com.triersistemas.criadordeboletim.controller;
 
-import br.com.triersistemas.criadordeboletim.domain.Nota;
 import br.com.triersistemas.criadordeboletim.model.NotaModel;
 import br.com.triersistemas.criadordeboletim.service.NotaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +49,10 @@ public class NotaController {
     @GetMapping("/valor-maior-ou-igual-a/{valor}")
     public List<NotaModel> findByNotaGreaterThanEqual(@PathVariable BigDecimal valor) {
         return notaService.findByNotaGreaterThanEqual(valor);
+    }
+
+    @GetMapping("/lista-por-avaliacao/{idAluno}/{avaliacao}")
+    public List<NotaModel> listaPorAvaliacaoJPQL(@PathVariable UUID idAluno,@PathVariable Integer avaliacao){
+        return notaService.listaPorAvaliacaoJPQL(idAluno, avaliacao);
     }
 }

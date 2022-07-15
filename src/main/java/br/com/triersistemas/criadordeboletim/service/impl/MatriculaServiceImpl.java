@@ -1,17 +1,10 @@
 package br.com.triersistemas.criadordeboletim.service.impl;
 
-import br.com.triersistemas.criadordeboletim.domain.Aluno;
-import br.com.triersistemas.criadordeboletim.domain.Matricula;
-import br.com.triersistemas.criadordeboletim.exceptions.NaoExisteException;
-import br.com.triersistemas.criadordeboletim.model.MatriculaModel;
 import br.com.triersistemas.criadordeboletim.repository.MatriculaRepository;
 import br.com.triersistemas.criadordeboletim.service.AlunoService;
 import br.com.triersistemas.criadordeboletim.service.MatriculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class MatriculaServiceImpl implements MatriculaService {

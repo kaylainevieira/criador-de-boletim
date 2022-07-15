@@ -6,10 +6,8 @@ import br.com.triersistemas.criadordeboletim.domain.Nota;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface AlunoRepository extends JpaRepository<Aluno, UUID> {
@@ -15,6 +14,6 @@ public interface AlunoRepository extends JpaRepository<Aluno, UUID> {
             "FROM aluno a " +
             "WHERE a.nome_completo ILIKE '%' || ?1 || '%'",
             nativeQuery = true)
-    List<Aluno> buscarPeloNome(String nome);
+    List<Aluno> buscarPeloNomeSQL(String nome);
 
 }

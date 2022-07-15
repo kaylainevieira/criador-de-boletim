@@ -1,6 +1,5 @@
 package br.com.triersistemas.criadordeboletim.service.impl;
 
-import br.com.triersistemas.criadordeboletim.domain.Aluno;
 import br.com.triersistemas.criadordeboletim.domain.Materia;
 import br.com.triersistemas.criadordeboletim.exceptions.NaoExisteException;
 import br.com.triersistemas.criadordeboletim.model.MateriaModel;
@@ -51,6 +50,11 @@ public class MateriaServiceImpl implements MateriaService {
         Materia materia = this.buscarPorId(id);
         materiaRepository.delete(materia);
         return new MateriaModel(materia);
+    }
+
+    @Override
+    public List<Materia> listarPorNome(String nome) {
+        return this.materiaRepository.listarPorNome(nome);
     }
 
     public Materia buscarPorId(UUID id) {

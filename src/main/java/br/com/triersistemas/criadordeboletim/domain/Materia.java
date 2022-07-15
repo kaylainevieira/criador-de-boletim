@@ -1,6 +1,5 @@
 package br.com.triersistemas.criadordeboletim.domain;
 
-import br.com.triersistemas.criadordeboletim.model.AlunoModel;
 import br.com.triersistemas.criadordeboletim.model.MateriaModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

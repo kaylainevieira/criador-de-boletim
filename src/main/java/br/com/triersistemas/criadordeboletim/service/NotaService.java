@@ -22,4 +22,6 @@ public interface NotaService {
 
     List<NotaModel> findByNotaGreaterThanEqual(BigDecimal valor);
 
+    List<NotaModel> listaPorAvaliacaoJPQL(UUID idAluno, Integer avaliacao);
+
 }

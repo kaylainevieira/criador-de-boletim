@@ -14,4 +14,6 @@ public interface MateriaService {
 
     MateriaModel alterar(MateriaModel model);
     MateriaModel remover(UUID id);
+
+    List<Materia> listarPorNome(String nome);
 }

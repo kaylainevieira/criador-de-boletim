@@ -78,7 +78,13 @@ public class NotaServiceImpl implements NotaService {
         return notaRepository.findByValorGreaterThanEqual(valor).stream().map(NotaModel::new).toList();
     }
 
+    @Override
+    public List<NotaModel> listaPorAvaliacaoJPQL(UUID idAluno, Integer avaliacao) {
+        return notaRepository.listaPorAvaliacaoJPQL(idAluno, avaliacao).stream().map(NotaModel::new).toList();
+    }
+
     public Nota buscarPorId(UUID id) {
+
         return notaRepository.findById(id).orElseThrow(NaoExisteException::new);
     }
 

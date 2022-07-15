@@ -1,6 +1,5 @@
 package br.com.triersistemas.criadordeboletim.domain;
 
-import br.com.triersistemas.criadordeboletim.model.NotaModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

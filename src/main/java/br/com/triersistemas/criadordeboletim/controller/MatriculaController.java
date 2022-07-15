@@ -1,14 +1,7 @@
 package br.com.triersistemas.criadordeboletim.controller;
 
-import br.com.triersistemas.criadordeboletim.domain.Matricula;
-import br.com.triersistemas.criadordeboletim.model.MatriculaModel;
-import br.com.triersistemas.criadordeboletim.service.MatriculaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/matricula")

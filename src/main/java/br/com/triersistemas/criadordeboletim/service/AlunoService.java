@@ -1,6 +1,5 @@
 package br.com.triersistemas.criadordeboletim.service;
 
-import br.com.triersistemas.criadordeboletim.domain.Aluno;
 import br.com.triersistemas.criadordeboletim.model.AlunoModel;
 
 import java.util.List;
@@ -14,5 +13,5 @@ public interface AlunoService {
     AlunoModel alterar(AlunoModel model);
     AlunoModel remover(UUID id);
 
-    List<AlunoModel> buscarPeloNome(String nome);
+    List<AlunoModel> buscarPeloNomeSQL(String nome);
 }
