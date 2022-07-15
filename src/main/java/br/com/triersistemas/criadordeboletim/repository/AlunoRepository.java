@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public interface AlunoRepository extends JpaRepository<Aluno, UUID> {
 
+
     @Query(value = "" +
             "SELECT * " +
             "FROM aluno a " +
